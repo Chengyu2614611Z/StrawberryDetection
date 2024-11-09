@@ -10,7 +10,6 @@ the project of detecting strawberry for roommate, using yolov11 model
 
 from ultralytics.models import YOLO
 import os
-
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 
 if __name__ == '__main__':
@@ -21,3 +20,17 @@ if __name__ == '__main__':
 
 
 //finishing training dataset
+
+//detect.py
+
+from ultralytics.models import YOLO
+
+if __name__ == '__main__':
+    model = YOLO(model='yolo11n.pt')
+    # model.predict(source='D://yolo/ultralytics-main/ultralytics-main/datasets/test/images', device='0', imgsz=640, project='runs/detect/', name='exp')
+    results=model('D://yolo/ultralytics-main/ultralytics-main/datasets/test/images')
+
+    for result in results:
+        boxes=result.boxes
+        result.show()
+        result.save(filename="./runs/detect/result.jpg")
